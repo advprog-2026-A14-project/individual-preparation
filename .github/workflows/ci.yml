@@ -2,9 +2,9 @@ name: CI Scripts
 
 on:
   push:
-    branches: [ "*" ]
+    branches: [ "**" ]
   pull_request:
-    branches: [ "*" ]
+    branches: [ "**" ]
 
 jobs:
   build-and-analyze:
