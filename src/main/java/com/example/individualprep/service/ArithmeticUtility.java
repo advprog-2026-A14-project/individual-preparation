@@ -4,10 +4,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArithmeticUtility {
-    
+
     public double add(double o1, double o2) {
-        // TODO: Implement me properly!
-        return 0.0;
+        return o1 + o2;
     }
 
     public double subtract(double o1, double o2) {
