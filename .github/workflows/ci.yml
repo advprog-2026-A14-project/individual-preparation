@@ -2,9 +2,13 @@ name: CI Scripts
 
 on:
   push:
-    branches: [ "**" ]
+    branches:
+      - "main"
+      - "feat/arithmetic-multiply"
+      - "feat/vector-multiply"
   pull_request:
-    branches: [ "**" ]
+    branches:
+      - "main"
 
 jobs:
   build-and-analyze:
