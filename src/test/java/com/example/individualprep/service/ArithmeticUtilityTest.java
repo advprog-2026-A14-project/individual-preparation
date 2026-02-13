@@ -29,4 +29,39 @@ class ArithmeticUtilityTest {
         assertTrue(Double.isNaN(arithmeticUtility.add(Double.NaN, 1.0)));
         assertTrue(Double.isNaN(arithmeticUtility.add(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY)));
     }
+
+    @Test
+    void testExponent() {
+        assertEquals(8.0, arithmeticUtility.exponent(2.0, 3), 0.0001);
+        assertEquals(1.0, arithmeticUtility.exponent(5.0, 0), 0.0001);
+        assertEquals(0.25, arithmeticUtility.exponent(2.0, -2), 0.0001);
+        assertEquals(-8.0, arithmeticUtility.exponent(-2.0, 3), 0.0001);
+        assertEquals(16.0, arithmeticUtility.exponent(-2.0, 4), 0.0001);
+    }
+
+    @Test
+    void testMultiply() {
+        assertEquals(6.0, arithmeticUtility.multiply(2.0, 3.0), 0.0001);
+        assertEquals(-12.0, arithmeticUtility.multiply(-4.0, 3.0), 0.0001);
+        assertEquals(-12.0, arithmeticUtility.multiply(4.0, -3.0), 0.0001);
+        assertEquals(6.0, arithmeticUtility.multiply(-2.0, -3.0), 0.0001);
+
+        assertEquals(11.0, arithmeticUtility.multiply(11.0, 1.0), 0.0001);
+        assertEquals(0.0, arithmeticUtility.multiply(2.0, 0.0), 0.0001);
+        assertEquals(0.0, arithmeticUtility.multiply(-2.0, 0.0), 0.0001);
+        assertEquals(-0.0, arithmeticUtility.multiply(2.0, -0.0), 0.0001);
+        assertEquals(0.0, arithmeticUtility.multiply(0.0, 0.0), 0.0001);
+
+        assertEquals(Double.POSITIVE_INFINITY, arithmeticUtility.multiply(Double.POSITIVE_INFINITY, 3.0));
+        assertEquals(Double.NEGATIVE_INFINITY, arithmeticUtility.multiply(Double.NEGATIVE_INFINITY, 3.0));
+        assertEquals(Double.NEGATIVE_INFINITY, arithmeticUtility.multiply(Double.POSITIVE_INFINITY, -1.0));
+        assertEquals(Double.NEGATIVE_INFINITY, arithmeticUtility.multiply(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY));
+        assertEquals(Double.POSITIVE_INFINITY, arithmeticUtility.multiply(Double.NEGATIVE_INFINITY, Double.NEGATIVE_INFINITY));
+        assertTrue(Double.isNaN(arithmeticUtility.multiply(Double.NaN, 3.0)));
+        assertTrue(Double.isNaN(arithmeticUtility.multiply(Double.POSITIVE_INFINITY, 0.0)));
+        assertTrue(Double.isNaN(arithmeticUtility.multiply(Double.NEGATIVE_INFINITY, 0.0)));
+
+        assertEquals(Double.POSITIVE_INFINITY, arithmeticUtility.multiply(Double.MAX_VALUE, 3.0));
+        assertEquals(0.0, arithmeticUtility.multiply(Double.MIN_VALUE, 0.1));
+    }
 }
