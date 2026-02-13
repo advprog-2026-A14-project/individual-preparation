@@ -210,4 +210,15 @@ class VectorUtilityTest {
 
         assertArrayEquals(expected, vectorUtility.subtract(v1, v2), 1e-10);
     }
+
+    @Test
+    void testSubtractNullThrows() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            vectorUtility.subtract(null, new double[]{1.0, 2.0});
+        }, "Should throw exception when first vector is null");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            vectorUtility.subtract(new double[]{1.0, 2.0}, null);
+        }, "Should throw exception when second vector is null");
+    }
 }
