@@ -1,4 +1,4 @@
-name: CI CD Scripts
+name: CI Scripts
 
 on:
   push:
