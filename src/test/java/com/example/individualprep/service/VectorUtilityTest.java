@@ -104,4 +104,62 @@ class VectorUtilityTest {
         vectorUtility.norm(v);
         assertArrayEquals(copy, v, 0.0);
     }
+
+    @Test
+    void testMultiplyPositiveValue() {
+        double[] v1 = {0.2, 0.3};
+        int x1 = 4;
+        double[] expected1 = {0.8, 1.2};
+        assertArrayEquals(expected1, vectorUtility.multiply(v1, x1), 1e-9);
+
+        double[] v2 = {0.4, 0.5, 0.6};
+        int x2 = 10;
+        double[] expected2 = {4.0, 5.0, 6.0};
+        assertArrayEquals(expected2, vectorUtility.multiply(v2, x2), 1e-9);
+    }
+
+    @Test
+    void testMultiplyNegativeValue() {
+        double[] v1 = {0.2, -0.3};
+        int x1 = -4;
+        double[] expected1 = {-0.8, 1.2};
+        assertArrayEquals(expected1, vectorUtility.multiply(v1, x1), 1e-9);
+    }
+
+    @Test
+    void testMultiplyByZero() {
+        double[] v1 = {0.2, -0.3};
+        int x1 = 0;
+        double[] expected1 = {0, 0};
+        assertArrayEquals(expected1, vectorUtility.multiply(v1, x1), 1e-9);
+
+        double[] v2 = {0.0, 0.0, 0.0};
+        int x2 = 10;
+        double[] expected2 = {0.0, 0.0, 0.0};
+        assertArrayEquals(expected2, vectorUtility.multiply(v2, x2), 1e-9);
+    }
+
+    @Test
+    void testMultiplyEmpty() {
+        double[] v1 = {};
+        int x1 = 4;
+        double[] expected1 = {};
+        assertArrayEquals(expected1, vectorUtility.multiply(v1, x1), 1e-9);
+    }
+
+    @Test
+    void testMultiplyNullThrows() {
+        double[] v1 = null;
+        int x1 = 5;
+        assertThrows(IllegalArgumentException.class, () -> vectorUtility.multiply(v1, x1));
+    }
+
+    @Test
+    void testMultiplyDoesNotModifyInput() {
+        double[] v1 = {3.0, 4.0};
+        int x1 = 5;
+        double[] copy = v1.clone();
+        vectorUtility.multiply(v1, x1);
+        assertArrayEquals(copy, v1, 0.0);
+    }
 }
