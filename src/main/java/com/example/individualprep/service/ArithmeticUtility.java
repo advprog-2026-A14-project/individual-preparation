@@ -25,6 +25,6 @@ public class ArithmeticUtility {
     }
 
     public double exponent(double o1, int n) {
-        return Math.pow(o1, (double) n);
+        return Math.pow(o1, n);
     }
 }
