@@ -1,8 +1,8 @@
 package com.example.individualprep.service;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class ArithmeticUtilityTest {
 
@@ -28,5 +28,30 @@ class ArithmeticUtilityTest {
 
         assertTrue(Double.isNaN(arithmeticUtility.add(Double.NaN, 1.0)));
         assertTrue(Double.isNaN(arithmeticUtility.add(Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY)));
+    }
+
+    @Test
+    void testDividePositive() {
+        assertEquals(5.0, arithmeticUtility.divide(10.0, 2.0), 1e-10);
+        assertEquals(0.3333333333333333, arithmeticUtility.divide(1.0, 3.0), 1e-15);
+    }
+
+    @Test
+    void testDivideNegative() {
+        assertEquals(-4.0, arithmeticUtility.divide(-8.0, 2.0), 1e-10);
+
+        assertEquals(2.0, arithmeticUtility.divide(-8.0, -4.0),1e-10);
+    }
+
+    @Test
+    void testDivideByZeroThrows() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            arithmeticUtility.divide(10.0, 0.0);
+        }, "Divide by zero exception");
+    }
+
+    @Test
+    void testDivideZeroByNumber() {
+        assertEquals(0.0, arithmeticUtility.divide(0.0, 5.0), 1e-10);
     }
 }
