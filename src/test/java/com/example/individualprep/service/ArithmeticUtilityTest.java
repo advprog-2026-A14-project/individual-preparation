@@ -2,6 +2,7 @@ package com.example.individualprep.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 class ArithmeticUtilityTest {
@@ -63,5 +64,30 @@ class ArithmeticUtilityTest {
 
         assertEquals(Double.POSITIVE_INFINITY, arithmeticUtility.multiply(Double.MAX_VALUE, 3.0));
         assertEquals(0.0, arithmeticUtility.multiply(Double.MIN_VALUE, 0.1));
+    }
+
+    @Test
+    void testDividePositive() {
+        assertEquals(5.0, arithmeticUtility.divide(10.0, 2.0), 1e-10);
+        assertEquals(0.3333333333333333, arithmeticUtility.divide(1.0, 3.0), 1e-15);
+    }
+
+    @Test
+    void testDivideNegative() {
+        assertEquals(-4.0, arithmeticUtility.divide(-8.0, 2.0), 1e-10);
+
+        assertEquals(2.0, arithmeticUtility.divide(-8.0, -4.0),1e-10);
+    }
+
+    @Test
+    void testDivideByZeroThrows() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            arithmeticUtility.divide(10.0, 0.0);
+        }, "Divide by zero exception");
+    }
+
+    @Test
+    void testDivideZeroByNumber() {
+        assertEquals(0.0, arithmeticUtility.divide(0.0, 5.0), 1e-10);
     }
 }

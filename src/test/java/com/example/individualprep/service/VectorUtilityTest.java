@@ -36,7 +36,7 @@ class VectorUtilityTest {
         double[] v2 = {1.0, 2.0, 3.0};
         assertThrows(IllegalArgumentException.class, () -> vectorUtility.dotProduct(v1, v2));
     }
-    
+
     @Test
     void testAdd() {
         double[] v1 = {1.0, 2.0, 3.0};
@@ -161,5 +161,64 @@ class VectorUtilityTest {
         double[] copy = v1.clone();
         vectorUtility.multiply(v1, x1);
         assertArrayEquals(copy, v1, 0.0);
+    }
+
+    @Test
+    void testSubtractPositiveValue() {
+        double[] v1 = {3.0, 4.0, 1.0};
+        double[] v2 = {1.0, 2.0, 7.0};
+        double[] expected1 = {2.0, 2.0, -6.0};
+
+        assertArrayEquals(expected1, vectorUtility.subtract(v1, v2), 1e-10);
+
+        double[] v3 = {0.3, 0.4, 0.1};
+        double[] v4 = {0.2, 0.1, 0.2};
+        double[] expected2 = {0.1, 0.3, -0.1};
+
+        assertArrayEquals(expected2, vectorUtility.subtract(v3, v4), 1e-10);
+    }
+
+    @Test
+    void testSubtractNegativeValue() {
+        double[] v1 = {-3.0, -4.0, -1.0};
+        double[] v2 = {-1.0, -2.0, -7.0};
+        double[] expected1 = {-2.0, -2.0, 6.0};
+
+        assertArrayEquals(expected1, vectorUtility.subtract(v1, v2), 1e-10);
+
+        double[] v3 = {-0.3, -0.4, -0.1};
+        double[] v4 = {-0.2, -0.1, -0.2};
+        double[] expected2 = {-0.1, -0.3, 0.1};
+
+        assertArrayEquals(expected2, vectorUtility.subtract(v3, v4), 1e-10);
+    }
+
+    @Test
+    void testSubtractMixedSign() {
+        double[] v1 = {-0.3, -0.4, 0.1};
+        double[] v2 = {0.2, -0.1, -0.2};
+        double[] expected1 = {-0.5, -0.3, 0.3};
+
+        assertArrayEquals(expected1, vectorUtility.subtract(v1, v2), 1e-10);
+    }
+
+    @Test
+    void testSubtractPrecision() {
+        double[] v1 = {1_000_000.0, 0.0000001};
+        double[] v2 = {1.0, 0.00000005};
+        double[] expected = {999_999.0, 0.00000005};
+
+        assertArrayEquals(expected, vectorUtility.subtract(v1, v2), 1e-10);
+    }
+
+    @Test
+    void testSubtractNullThrows() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            vectorUtility.subtract(null, new double[]{1.0, 2.0});
+        }, "Should throw exception when first vector is null");
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            vectorUtility.subtract(new double[]{1.0, 2.0}, null);
+        }, "Should throw exception when second vector is null");
     }
 }
